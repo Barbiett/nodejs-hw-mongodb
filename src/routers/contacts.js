@@ -28,6 +28,13 @@ router.post(
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
+
+router.post(
+  '/register',
+  validateBody(createContactSchema),
+  ctrlWrapper(createContactController),
+);
+
 router.delete(
   '/contacts/:contactId',
   isValidId,
