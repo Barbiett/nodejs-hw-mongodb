@@ -8,26 +8,26 @@ const parseContactType = (type) => {
   //   return 'invalid data';
 };
 
-const parsePhoneNumber = (number) => {
-  const isString = typeof number === 'string';
-  if (!isString) return;
+// const parsePhoneNumber = (number) => {
+//   const isString = typeof number === 'string';
+//   if (!isString) return;
 
-  const parsedPhoneNumber = parseInt(number);
-  if (Number.isNaN(parsedPhoneNumber)) {
-    return;
-  }
+//   const parsedPhoneNumber = parseInt(number);
+//   if (Number.isNaN(parsedPhoneNumber)) {
+//     return;
+//   }
 
-  return parsedPhoneNumber;
-};
+//   return parsedPhoneNumber;
+// };
 
 export const parseFilterParams = (query) => {
-  const { type, number } = query;
+  const { type } = query;
 
   const parsedContactType = parseContactType(type);
-  const parsedPhoneNumber = parsePhoneNumber(number);
+  // const parsedPhoneNumber = parsePhoneNumber(number);
 
   return {
     contactType: parsedContactType,
-    phoneNumber: parsedPhoneNumber,
+    // phoneNumber: parsedPhoneNumber,
   };
 };
