@@ -13,10 +13,6 @@ export const checkRoles =
     }
 
     const { role } = user;
-    // if (roles.includes(ROLES.TEACHER) && role === ROLES.TEACHER) {
-    //   next();
-    //   return;
-    // }
 
     if (roles.includes(ROLES.USER) && role === ROLES.USER) {
       const { contactId } = req.params;
