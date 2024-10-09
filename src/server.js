@@ -1,4 +1,5 @@
 import express from 'express';
+
 import cors from 'cors';
 import { env } from './utils/env.js';
 import router from './routers/index.js';
@@ -10,7 +11,9 @@ export const setupServer = () => {
   const app = express();
   app.use(cors());
   app.use(express.json());
+
   app.use(cookieParser());
+
   app.use((req, res, next) => {
     console.log(`Time: ${new Date().toLocaleString()}`);
     next();
