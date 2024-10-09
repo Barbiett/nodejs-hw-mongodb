@@ -13,13 +13,15 @@ import { parseFilterParams } from '../utils/parseFilterParams.js';
 export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
-  const filter = { ...parseFilterParams(req.query), userId: req.user._id };
+  const filter = parseFilterParams(req.query);
+  const userId = req.user._id;
   const contacts = await getAllContacts({
     page,
     perPage,
     sortBy,
     sortOrder,
     filter,
+    userId,
   });
   res.json({
     status: 200,
@@ -27,7 +29,6 @@ export const getContactsController = async (req, res) => {
     data: contacts,
   });
 };
-
 export const getContactsByIdController = async (req, res) => {
   const { contactId } = req.params;
   const contact = await getContactById(contactId, req.user._id);
@@ -41,7 +42,6 @@ export const getContactsByIdController = async (req, res) => {
     data: contact,
   });
 };
-
 export const createContactController = async (req, res) => {
   const userId = req.user._id;
   const contact = await createContact({ ...req.body, userId });
@@ -52,7 +52,6 @@ export const createContactController = async (req, res) => {
     data: contact,
   });
 };
-
 export const deleteContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const contact = await deleteContact(contactId, req.user._id);
@@ -77,7 +76,6 @@ export const upsertContactController = async (req, res, next) => {
     data: result.contact,
   });
 };
-
 export const patchContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const result = await updateContact(contactId, req.body, req.user._id);
